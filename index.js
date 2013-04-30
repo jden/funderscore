@@ -41,4 +41,15 @@ _.concat = function (objA, objB) {
   return objA
 }
 
+/* i might be doing this wrong:
+ * this applies a function to each key-value pair in a dictionary
+ * where the function is (Pair) => Array
+ * and returns a flattened Array
+ */
+_.flatMap = function (obj, fn) {
+  return _.reduce(obj, function (arr, val, key) {
+    return arr.concat(fn(val, key))
+  }, [])
+}
+
 module.exports = _
