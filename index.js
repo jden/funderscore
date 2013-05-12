@@ -16,6 +16,45 @@ _.contains = function (obj, key) {
   return false
 }
 
+// quantifier
+_.some = function (obj, predicate) {
+  for (var k in obj) {
+    if (predicate(obj[k], k)) {
+      return true
+    }
+  }
+  return false
+}
+_.every = function (obj, predicate) {
+  for (var k in obj) {
+    if (!predicate(obj[k], k)) {
+      return false
+    }
+  }
+  return true
+}
+
+// collection
+_.count = function (obj, predicate) {
+  if (typeof predicate !== 'function') {
+    return Object.keys(obj).length
+  }
+  var c = 0
+  for (var k in obj) {
+    if (predicate(obj[k])) {
+      c++
+    }
+  }
+  return c
+}
+//_.filter
+_.forEach = function (obj, iterator) {
+  for (var k in obj) {
+    iterator(obj[k], k)
+  }
+  return obj
+}
+
 // algebraic fns
 
 _.map = function (obj, fn) {
