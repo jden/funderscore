@@ -47,7 +47,17 @@ _.count = function (obj, predicate) {
   }
   return c
 }
-//_.filter
+
+_.filter = function (obj, predicate) {
+  var o = {}
+  for (var k in obj) {
+    if (predicate(obj[k])) {
+      o[k] = obj[k]
+    }
+  }
+  return o
+}
+
 _.forEach = function (obj, iterator) {
   for (var k in obj) {
     iterator(obj[k], k)
