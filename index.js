@@ -18,6 +18,7 @@ _.contains = function (obj, key) {
 
 // quantifier
 _.some = function (obj, predicate) {
+  predicate = predicate || function () { return true }
   for (var k in obj) {
     if (predicate(obj[k], k)) {
       return true
