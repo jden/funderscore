@@ -143,7 +143,7 @@ _.assert = function (fn, expect, val) {
   if (val === undefined) {
     // return partially applied function
     return function (val) {
-      return assert(fn, expect, val)
+      return _.assert(fn, expect, val)
     }
   }
   if (!fn(expect, val)) {
