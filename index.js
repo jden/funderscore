@@ -1,12 +1,15 @@
+// (Any) => Any
 var _ = function (x) { return x }
 
 // collection fns
+// (String, Any) => Object
 _.pair = function (key, val) {
   var o = {}
   o[key] = val
   return o
 }
 
+// (Object, String) => Boolean
 _.contains = function (obj, key) {
   for (var k in obj) {
     if (k === key) {
@@ -16,7 +19,11 @@ _.contains = function (obj, key) {
   return false
 }
 
-// quantifier
+// quantifiers
+
+// type Predicate : (value: Any, key?: String) => Boolean
+
+// (Object, Predicate) => Boolean
 _.some = function (obj, predicate) {
   predicate = predicate || function () { return true }
   for (var k in obj) {
@@ -26,6 +33,8 @@ _.some = function (obj, predicate) {
   }
   return false
 }
+
+// (Object, Predicate) => Boolean
 _.every = function (obj, predicate) {
   for (var k in obj) {
     if (!predicate(obj[k], k)) {
@@ -36,6 +45,8 @@ _.every = function (obj, predicate) {
 }
 
 // collection
+
+// (Object, Predicate?) => Int
 _.count = function (obj, predicate) {
   if (typeof predicate !== 'function') {
     return Object.keys(obj).length
@@ -49,6 +60,7 @@ _.count = function (obj, predicate) {
   return c
 }
 
+// (Object, Predicate) => Object
 _.filter = function (obj, predicate) {
   var o = {}
   for (var k in obj) {
@@ -59,6 +71,7 @@ _.filter = function (obj, predicate) {
   return o
 }
 
+// (Object, Function) => Object
 _.forEach = function (obj, iterator) {
   for (var k in obj) {
     iterator(obj[k], k)
@@ -68,6 +81,7 @@ _.forEach = function (obj, iterator) {
 
 // algebraic fns
 
+// (Object, (val: Any, key: String) => Any) => Object
 _.map = function (obj, fn) {
   var o = {}
   for (var k in obj) {
@@ -76,6 +90,9 @@ _.map = function (obj, fn) {
   return o
 }
 
+// type Reducer : (accumulator: Any, val: Any, key: String) => Any
+
+// (Object, Reducer, seed: Any) => Any
 _.reduce = function (obj, fn, seed) {
   var val = seed || {}
   for (var k in obj) {
@@ -84,6 +101,7 @@ _.reduce = function (obj, fn, seed) {
   return val
 }
 
+// (Object, Object) => Object
 _.concat = function (objA, objB) {
   for (var k in objB) {
     objA[k] = objB[k]
@@ -91,11 +109,12 @@ _.concat = function (objA, objB) {
   return objA
 }
 
-/* i might be doing this wrong:
+/* I might be doing this wrong:
  * this applies a function to each key-value pair in a dictionary
  * where the function is (Pair) => Array
  * and returns a flattened Array
  */
+// (Object, Reducer) => Array
 _.flatMap = function (obj, fn) {
   return _.reduce(obj, function (arr, val, key) {
     return arr.concat(fn(val, key))
