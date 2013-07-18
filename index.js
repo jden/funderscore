@@ -21,7 +21,7 @@ _.contains = function (obj, key) {
 
 // quantifiers
 
-// type Predicate : (value: Any, key?: String) => Boolean
+// type Predicate : (value: Any, key: String?) => Boolean
 
 // (Object, Predicate) => Boolean
 _.some = function (obj, predicate) {
@@ -151,5 +151,26 @@ _.assert = function (fn, expect, val) {
   }
 }
 
+// connective operators
+
+// (Any) => Boolean
+_.not = function (a) {
+  return !a
+}
+
+// (Any, Any) => Boolean
+_.and = function (a, b) {
+  return a && b
+}
+
+// (Any, Any) => Boolean
+_.or = function (a, b) {
+  return a || b
+}
+
+// (Any, Any) => Boolean
+_.xor = function (a, b) {
+  return (a || b) && !(a && b)
+}
 
 module.exports = _
