@@ -1,6 +1,6 @@
 {
   "name": "funderscore",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "happy functional funtimes version of _",
   "main": "index.js",
   "scripts": {
