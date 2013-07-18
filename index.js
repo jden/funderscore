@@ -121,4 +121,35 @@ _.flatMap = function (obj, fn) {
   }, [])
 }
 
+
+
+// generic functions
+// (Any, Any) => Boolean
+_.eq = function (a, b) { return a === b }
+
+// type Comparator : (Any, Any) => Boolean
+// (Comparator, Any, Any) => void
+// (Comparator, Any) => (Any) => void
+// (Any, Any) => void
+// (Any) => (Any) => void
+// `fn` defaults to the Equality Comparator (_.eq)
+// Optionally curries `val`
+_.assert = function (fn, expect, val) {
+  if (typeof fn !== 'function') {
+    val = expect
+    expect = fn
+    fn = eq
+  }
+  if (val === undefined) {
+    // return partially applied function
+    return function (val) {
+      return assert(fn, expect, val)
+    }
+  }
+  if (!eq(expect, val)) {
+    throw new Error('Assertion error', expect, val)
+  }
+}
+
+
 module.exports = _
