@@ -138,7 +138,7 @@ _.assert = function (fn, expect, val) {
   if (typeof fn !== 'function') {
     val = expect
     expect = fn
-    fn = eq
+    fn = _.eq
   }
   if (val === undefined) {
     // return partially applied function
@@ -146,7 +146,7 @@ _.assert = function (fn, expect, val) {
       return assert(fn, expect, val)
     }
   }
-  if (!eq(expect, val)) {
+  if (!fn(expect, val)) {
     throw new Error('Assertion error', expect, val)
   }
 }
