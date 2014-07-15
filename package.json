@@ -1,6 +1,6 @@
 {
   "name": "funderscore",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "description": "happy functional funtimes version of _",
   "main": "index.js",
   "scripts": {
@@ -15,5 +15,8 @@
   ],
   "author": "jden <jason@denizac.org>",
   "license": "MIT",
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "mochi": "^0.2.0"
+  }
 }

@@ -44,6 +44,24 @@ _.every = function (obj, predicate) {
   return true
 }
 
+_.first = function (obj) {
+  for (var k in obj) {
+    return _.pair(k, obj[k])
+  }
+}
+
+_.key = function (obj) {
+  for (var k in obj) {
+    return k
+  }
+}
+
+_.value = function (obj) {
+  for (var k in obj) {
+    return obj[k]
+  }
+}
+
 // collection
 
 // (Object, Predicate?) => Int
@@ -171,6 +189,37 @@ _.or = function (a, b) {
 // (Any, Any) => Boolean
 _.xor = function (a, b) {
   return (a || b) && !(a && b)
+}
+
+// relational functions
+
+// (data : Object, projection : Object) => Object
+_.select = function (data, projection) {
+  if (typeof data !== 'object') {
+    throw new TypeError('missing required parameter `data`')
+  }
+  if (typeof projection !== 'object') {
+    throw new TypeError('missing required parameter `projection`')
+  }
+  if (Array.isArray(projection)) {
+    return _.select(data, projection.reduce(function (out, val) {
+      if (typeof val === 'object') {
+        _.concat(out, val)
+      } else {
+        out[val] = true
+      }
+      return out
+    },{}))
+  }
+  return _.reduce(projection, function (out, val, key) {
+    if (typeof val === 'string') {
+      out[val] = data[key]
+    } else {
+      out[key] = data[key]
+    }
+    return out
+  })
+
 }
 
 module.exports = _

@@ -2,29 +2,31 @@
 happy functional funtimes version of _
 
 ## usage
+```js
+var _ = require('funderscore')
 
-    var _ = require('funderscore')
+var foo = {
+  a: 'ha',
+  b: 'ob',
+  c: 'ac'
+}
 
-    var foo = {
-      a: 'ha',
-      b: 'ob',
-      c: 'ac'
-    }
+_.reduce(
+  _.map(foo, function (val) {
+      return val[1].toUpperCase()
+    }),
+  function (seed, val, key) {
+      seed[key+'M'] = val
+      return seed
+    })
+  )
+// => {
+//      aM: 'A',
+//      bM: 'B',
+//      cM: 'C'
+//    } 
+```
 
-    _.reduce(
-      _.map(foo, function (val) {
-          return val[1].toUpperCase()
-        }),
-      function (seed, val, key) {
-          seed[key+'M'] = val
-          return seed
-        })
-      )
-    // => {
-    //      aM: 'A',
-    //      bM: 'B',
-    //      cM: 'C'
-    //    } 
 
 ## stability
 
