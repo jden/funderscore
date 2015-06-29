@@ -27,7 +27,8 @@ describe('funderscore', function () {
       and: Function,
       or: Function,
       xor: Function,
-      select: Function
+      select: Function,
+      union: Function
     })
 
   })
@@ -111,6 +112,28 @@ describe('funderscore', function () {
         .should.deep.equal({
           a: 1, C: 3
         })
+    })
+  })
+
+  describe('_.union', function () {
+    it('calculates the union of two set Arrays', function () {
+      var a = [1, 2]
+      var b = [2, 3]
+
+      _.union(a, b)
+        .should.deep.equal([1, 2, 3])
+    })
+
+    it('can take a custom equality function (left precedence)', function () {
+      var a = [{id: 1, val: 'A'}, {id: 2, val: 'B'}]
+      var b = [{id: 1, val: 'a', id: 3, val: 'c'}]
+
+      _.union(a, b, function (x, y) { return x.id === y.id })
+        .should.deep.equal([
+            {id: 1, val: 'A'},
+            {id: 2, val: 'B'},
+            {id: 3, val: 'c'}
+          ])
     })
   })
 })

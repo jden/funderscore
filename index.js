@@ -222,4 +222,19 @@ _.select = function (data, projection) {
 
 }
 
+// union of two set arrays
+// (Array, Array, (Any, Any) => Boolean) => Array
+_.union = function (a, b, eq) {
+  eq = eq || _.eq
+  var out = Array.prototype.slice.call(a)
+  b.forEach(function (e) {
+    if (!a.some(function (l) {
+      return eq(e, l)
+    })) {
+      out.push(e)
+    }
+  })
+  return out
+}
+
 module.exports = _
